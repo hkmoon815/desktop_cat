@@ -1,7 +1,9 @@
 name: Build macOS App
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: {}
+  push:
+    branches: [ "main", "master" ]
 
 jobs:
   build-mac:
@@ -24,6 +26,8 @@ jobs:
     - name: Build with PyInstaller
       run: |
         pyinstaller --noconsole --windowed \
+          --collect-all furniture \
+          --collect-all actions \
           --add-data "actions:actions" \
           --add-data "furniture:furniture" \
           --add-data "utils.py:." \
